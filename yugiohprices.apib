@@ -1,0 +1,411 @@
+FORMAT: 1A
+HOST: http://yugiohprices.com/api
+
+# Yugioh Prices
+Documentation for the YugiohPrices.com API
+
+__If you use this API in one of your projects, an acknowledgement and linkback to [http://yugiohprices.com](http://yugiohprices.com) would be very much appreciated.  Also, shoot us an email at [contact@studiobebop.net](mailto:contact@studiobebop.net) and let us know about your project!__
+
+
+# Group Checking Card Prices
+API calls for getting prices for cards
+
+## Check Price for Card Name [GET /get_card_prices/{card_name}]
+Retrieves price data for every version of a card using its __name__.
+
++ Parameters
+    + card_name (string) - Name of card to retrieve prices for
+
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": [
+                {
+                    "name": "Shonen Jump promotional cards",
+                    "print_tag": "JMP-EN001",
+                    "rarity": "Ultra Rare",
+                    "price_data": {
+                        "status": "success",
+                        "data": {
+                            "listings": [],
+                            "prices": {
+                                "high": 114.95,
+                                "low": 114.95,
+                                "average": 114.95,
+                                "shift": 0,
+                                "shift_3": 0,
+                                "shift_7": 0,
+                                "shift_30": 0,
+                                "shift_90": 0,
+                                "shift_180": 0,
+                                "shift_365": 0,
+                                "updated_at": "2013-07-19 21:07:11 -0600"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+
+## Check Price for Card's Print Tag [GET /price_for_print_tag/{print_tag}]
+Retrieve price data for a specific version of a card using its __print tag__. (LOB-EN001, DUEA-EN014, etc).
+
++ Parameters
+    + print_tag (string) - Print tag to retrieve prices for, LOB-EN001, DUEA-EN014, etc
+
++ Response 200 (application/json)
+
+        {
+          "status": "success",
+          "data": {
+            "name": "Harpie Channeler",
+            "card_type": "monster",
+            "property": null,
+            "family": "wind",
+            "type": "Winged Beast/Effect",
+            "price_data": {
+              "name": "Lord of the Tachyon Galaxy",
+              "print_tag": "LTGY-EN035",
+              "rarity": "Ultra Rare",
+              "price_data": {
+                "status": "success",
+                "data": {
+                  "listings": [],
+                  "prices": {
+                    "high": 26.29,
+                    "low": 5,
+                    "average": 9.17,
+                    "shift": -0.0223880597014925,
+                    "shift_3": -0.00650054171180932,
+                    "shift_7": 0.0268756998880179,
+                    "shift_30": 0.295197740112994,
+                    "shift_90": 0.554237288135593,
+                    "shift_180": -0.36671270718232,
+                    "shift_365": 0,
+                    "updated_at": "2013-11-14 13:12:06 -0700"
+                  }
+                }
+              }
+            }
+          }
+        }
+
+## Check price history for a specific print tag and rarity [GET /price_history/{print_tag}?rarity={rarity}]
+Retrieve price history for a specific version of a card using its __print tag__ and __rarity__.
+
++ Parameters
+    + print_tag (string) - Print tag for card, LOB-EN001, DUEA-EN014, etc
+    + rarity (string) - Rarity of card
+
++ Response 200 (application/json)
+
+        {
+          "status": "success",
+          "data": [
+            {
+              "price_average": 6.33,
+              "price_shift": -0.0047169811320754715,
+              "created_at": "2013-11-14 00:42:12 -0700"
+            },
+            {
+              "price_average": 6.36,
+              "price_shift": 0.01597444089456869,
+              "created_at": "2013-11-12 19:16:07 -0700"
+            }
+            ]
+        }
+
+
+# Group Getting Set Data 
+API calls for getting prices and other information for card sets.
+
+## Retrieve prices for all cards in a specific set [GET /set_data/{set_name}]
+Returns rarities and low/high/average prices for each card in the set.
+
++ Parameters
+    + set_name (string) - Name of set to retrieve prices for
+    
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": {
+                "rarities": {
+                    "Rare": 20,
+                    "Common": 47,
+                    "Super Rare": 14,
+                    "Secret Rare": 8,
+                    "Ultimate Rare": 10,
+                    "Ultra Rare": 10,
+                    "Ghost Rare": 1,
+                    "Short Print": 1
+                },
+                "average": 454.57,
+                "lowest": 306.06,
+                "highest": 1127.01,
+                "tcg_booster_values": {
+                    "high": 48.26,
+                    "low": 3.15,
+                    "average": 4.83
+                },
+                "cards": [
+                    {
+                        "name": "Ally Salvo",
+                        "numbers": [
+                            {
+                                "name": "Starstrike Blast",
+                                "print_tag": "STBL-EN092",
+                                "rarity": "Rare",
+                                "price_data": {
+                                    "status": "success",
+                                    "data": {
+                                        "listings": [],
+                                        "prices": {
+                                            "high": 3.65,
+                                            "low": 0.57,
+                                            "average": 1.55,
+                                            "shift": 0,
+                                            "shift_3": -0.0828402366863905,
+                                            "shift_7": -0.00641025641025641,
+                                            "shift_21": 1.01298701298701,
+                                            "shift_30": 1.03947368421053,
+                                            "shift_90": 0.00649350649350649,
+                                            "shift_180": 0.131386861313869,
+                                            "shift_365": 0,
+                                            "updated_at": "2014-09-12 17:33:27 -0600"
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "card_type": "monster",
+                        "property": null,
+                        "family": "dark",
+                        "type": "Machine / Effect"
+                    },
+                    {
+                        "name": "Ally of Justice Thousand Arms",
+                        "numbers": [
+                            {
+                                "name": "Starstrike Blast",
+                                "print_tag": "STBL-EN093",
+                                "rarity": "Common",
+                                "price_data": {
+                                    "status": "success",
+                                    "data": {
+                                        "listings": [],
+                                        "prices": {
+                                            "high": 3.5,
+                                            "low": 0.35,
+                                            "average": 1.13,
+                                            "shift": 0,
+                                            "shift_3": -0.0588235294117647,
+                                            "shift_7": -0.0508474576271186,
+                                            "shift_21": 1.66666666666667,
+                                            "shift_30": 1.73170731707317,
+                                            "shift_90": -0.211267605633803,
+                                            "shift_180": -0.138461538461538,
+                                            "shift_365": 0,
+                                            "updated_at": "2014-09-12 17:39:23 -0600"
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "card_type": "monster",
+                        "property": null,
+                        "family": "dark",
+                        "type": "Machine / Effect"
+                    }
+                ]
+            }
+        }
+
+## Retrieve list of all set names in Yugioh Prices database [GET /card_sets]
+Retrieve a list of all card sets in the Yugioh Prices database
+
++ Response 200 (application/json)
+
+        ["2-Player Starter Deck: Yuya & Declan","2002 Booster Pack Tins","2003 Booster Pack Tins","2004 Collectors Tins","2005 Collectors Tins","2006 Collectors Tins","2007 Collectors Tins","2008 Collectors Tins","2012 Premium Collection Tin","2013 Collectible Tins Wave 1","2013 Collectible Tins Wave 2","2014 Mega-Tin Mega Pack","2014 Mega-Tins","2015 Mega-Tin Mega Pack","2015 Mega-Tins","Absolute Powerforce","Absolute Powerforce Sneak Peek Participation Card","Absolute Powerforce: Special Edition","Abyss Rising","Abyss Rising Sneak Peek participation card","Abyss Rising: Special Edition","Ancient Prophecy","Ancient Prophecy Sneak Peek participation card","Ancient Prophecy: Special Edition","Ancient Sanctuary","Anniversary Pack","Astral Pack 8","Astral Pack Eight","Astral Pack Five","Astral Pack Four","Astral Pack One","Astral Pack Seven","Astral Pack Six","Astral Pack Three","Astral Pack Two","Attack of the Giant Card!!","Battle City Tournament Kit","Battle Pack 2: War of the Giants","Battle Pack 2: War of the Giants - Round 2","Battle Pack 3: Monster League","Battle Pack Tournament Prize Cards","Battle Pack: Epic Dawn","Breakers of Shadow","Champion Pack: Game Eight","Champion Pack: Game Five","Champion Pack: Game Four","Champion Pack: Game One","Champion Pack: Game Seven","Champion Pack: Game Six","Champion Pack: Game Three","Champion Pack: Game Two","Clash of Rebellions","Clash of Rebellions Sneak Peek Participation Card","Clash of Rebellions: Special Edition","Collectible Tins 2009","Collectible Tins 2009 Wave 1","Collectible Tins 2009 Wave 2","Collectible Tins 2010 Wave 1","Collectible Tins 2010 Wave 2","Collectible Tins 2011 Wave 1","Collectible Tins 2011 Wave 2","Collectible Tins 2012 Wave 1","Collectible Tins 2012 Wave 2","Collectible Tins 2012 Wave 2.5","Cosmo Blazer","Cosmo Blazer Sneak Peek participation card","Cosmo Blazer: Special Edition","Crimson Crisis","Crimson Crisis Sneak Peek Participation Card","Crimson Crisis: Special Edition","Crossed Souls","Crossed Souls Sneak Peek Participation Card","Crossed Souls: Advance Edition","Crossroads of Chaos","Crossroads of Chaos Sneak Peek Participation Card","Crossroads of Chaos: Special Edition","Cyber Dragon Revolution Structure Deck","Cyberdark Impact","Cyberdark Impact Sneak Peek Participation Card","Cybernetic Revolution","Cybernetic Revolution Sneak Peek Participation Card","Dark Beginning 1","Dark Beginning 2","Dark Crisis","Dark Legends","Dark Legion Starter Deck","Dark Revelation Volume 1","Dark Revelation Volume 2","Dark Revelation Volume 3","Dark Revelation Volume 4","Deluxe Edition Structure Deck Promotional Cards","Demo Deck 2015","Demo Pack","Dimension of Chaos","Dimension of Chaos Sneak Peek Participation Card","Dragons Collide Structure Deck","Dragons of Legend","Dragons of Legend 2","Dragunity Legion Structure Deck","Duel Disk - Yusei Version","Duel Master's Guide","Duel Terminal - Preview Wave 1","Duel Terminal - Preview Wave 2","Duel Terminal 1","Duel Terminal 2","Duel Terminal 3","Duel Terminal 4","Duel Terminal 5a","Duel Terminal 5b","Duel Terminal 6a","Duel Terminal 6b","Duel Terminal 7a","Duel Terminal 7b","Duelist Alliance","Duelist Alliance Sneak Peek Participation Card","Duelist Alliance: Deluxe Edition","Duelist League 13 participation cards","Duelist League 14 participation cards","Duelist League 15 participation cards","Duelist League 16 participation cards","Duelist League 17 participation cards","Duelist League 18 participation cards","Duelist League 2 participation cards","Duelist League 2010 participation cards","Duelist League 3 participation cards","Duelist League Demo 2010","Duelist League Series 1 participation cards","Duelist League Series 10 participation card","Duelist League Series 2 participation cards","Duelist League Series 3 participation card","Duelist League Series 4 participation card","Duelist League Series 5 participation card","Duelist League Series 6 participation card","Duelist League Series 7 participation card","Duelist League Series 8 participation card","Duelist League Series 9 participation card","Duelist Pack Collection - Jaden Yuki","Duelist Pack Collection Tin 2008","Duelist Pack Collection Tin 2009","Duelist Pack Collection Tin 2010","Duelist Pack Collection Tin 2011","Duelist Pack: Aster Phoenix","Duelist Pack: Battle City","Duelist Pack: Chazz Princeton","Duelist Pack: Crow","Duelist Pack: Jaden Yuki","Duelist Pack: Jaden Yuki 2","Duelist Pack: Jaden Yuki 3","Duelist Pack: Jesse Anderson","Duelist Pack: Kaiba","Duelist Pack: Yugi","Duelist Pack: Yusei","Duelist Pack: Yusei 2","Duelist Pack: Yusei 3","Duelist Pack: Zane Truesdale","Duelist Packs: Special Edition","Duelist Revolution","Duelist Revolution Sneak Peek Participation Card","Duelist Revolution: Special Edition","Elemental Energy","Elemental Energy Sneak Peek Participation Card","Elemental Energy: Special Edition","Emperor of Darkness Structure Deck","Enemy of Justice","Enemy of Justice Sneak Peek Participation Card","Exclusive Pack","Exclusive Tins 2008","Exclusive Tins 2009","Extreme Victory","Extreme Victory Sneak Peek participation card","Fire Fists: Special Edition","Flaming Eternity","Flaming Eternity Sneak Peek participation card","Forbidden Legacy","Force of the Breaker","Force of the Breaker Sneak Peek Participation Card","Force of the Breaker: Special Edition","GX Next Generation Blister Pack Promo","Galactic Overlord","Galactic Overlord Sneak Peek participation card","Gates of the Underworld Structure Deck","Geargia Rampage Structure Deck","Generation Force","Generation Force Sneak Peek Participation Card","Generation Force: Special Edition","Gladiator's Assault","Gladiator's Assault Sneak Peek participation card","Gladiator's Assault: Special Edition","Gold Series","Gold Series 2009","Gold Series 3","Gold Series 4: Pyramids Edition","Gold Series: Haunted Mine","HERO Strike Structure Deck","Hidden Arsenal","Hidden Arsenal 2","Hidden Arsenal 3","Hidden Arsenal 4: Trishula's Triumph","Hidden Arsenal 5: Steelswarm Invasion","Hidden Arsenal 5: Steelswarm Invasion: Special Edition","Hidden Arsenal 6: Omega Xyz","Hidden Arsenal 7: Knight of Stars","Hidden Arsenal: Special Edition","High-Speed Riders","Hobby League 1 participation cards A","Hobby League 1 participation cards B","Hobby League 1 participation cards C","Hobby League 2 participation card A","Hobby League 2 participation card B","Hobby League 2 participation card C","Hobby League 2 participation card D","Hobby League 2 participation card E","Hobby League 2 participation card F","Hobby League 3 participation card A","Hobby League 3 participation card B","Hobby League 3 participation card C","Hobby League 3 participation card D","Hobby League 3 participation card E","Hobby League 3 participation card F","Hobby League 3 participation card G","Hobby League 4 participation card A","Hobby League 4 participation card B","Hobby League 4 participation card C","Hobby League 4 participation card D","Hobby League 4 participation card E","Hobby League 4 participation card F","Hobby League 5 participation card A","Hobby League 5 participation card B","Hobby League 5 participation card C","Hobby League 5 participation card D","Hobby League 5 participation card E","Hobby League 6 participation card A","Hobby League 6 participation card B","Hobby League 6 participation card C","Hobby League 6 participation card D","Hobby League 6 participation card E","Hobby League 6 participation card F","Hobby League 7 participation card A","Hobby League 7 participation card B","Hobby League 7 participation card C","Hobby League 7 participation card D","Hobby League 7 participation card E","Hobby League 7 participation card F","Invasion of Chaos","Invasion of Chaos: Special Edition","Judgment of the Light","Judgment of the Light Sneak Peek Participation Card","Judgment of the Light: Deluxe Edition","Jump Pack 2014 Issue 1 promotional card","Jump Pack 2014 Issue 2 promotional card","Jump Pack 2014 Issue 3 promotional card","Kids WB Duel of Destiny promotional card","Labyrinth of Nightmare","Legacy of Darkness","Legacy of the Valiant","Legacy of the Valiant Sneak Peek Participation Card","Legacy of the Valiant: Deluxe Edition","Legend of Blue Eyes White Dragon","Legendary Collection","Legendary Collection 2 Mega-Pack","Legendary Collection 2: The Duel Academy Years","Legendary Collection 3 Mega-Pack","Legendary Collection 3: Yugi's World","Legendary Collection 4 Mega-Pack","Legendary Collection 4: Joey's World","Legendary Collection 5D's","Legendary Collection 5D's Mega-Pack","Light and Darkness Power Pack","Light of Destruction","Light of Destruction Sneak Peek participation card","Light of Destruction: Special Edition","Limited Edition 1","Lord of the Tachyon Galaxy","Lord of the Tachyon Galaxy Sneak Peek participation card","Lost Sanctuary Structure Deck","Machina Mayhem Structure Deck","Magic Ruler","Magician's Force","Make-A-Wish Foundation promotional card","Master Collection Volume 1","Master Collection Volume 2","Master of Pendulum Structure Deck","Master of Pendulum Structure Deck‎","Mattel Action Figure promotional cards: Series 1","Mattel Action Figure promotional cards: Series 2","Mattel Action Figure promotional cards: Series 3","Mattel Action Figures Promos: Series 2","McDonald's Promotional Cards","McDonald's Promotional Cards 2","Metal Raiders","Movie Pack","Noble Knights of the Round Table Box Set","Noble Knights of the Round Table Power-Up Pack","Number Hunters","Onslaught of the Fire Kings Structure Deck","Order of Chaos","Order of Chaos Sneak Peek participation card","Order of Chaos: Special Edition","Phantom Darkness","Phantom Darkness Sneak Peek participation card","Phantom Darkness: Special Edition","Pharaoh Tour 2005 promotional cards","Pharaoh Tour 2006 promotional cards","Pharaoh Tour 2007 promotional cards","Pharaoh's Servant","Pharaonic Guardian","Photon Shockwave","Photon Shockwave Sneak Peek Participation Card","Poseidra Value Box","Power of Chaos Promos: Joey the Passion","Power of Chaos Promos: Yugi the Destiny","Power of the Duelist","Power of the Duelist Sneak Peek Participation Card","Premium Collection Tin","Premium Gold","Premium Gold: Return of the Bling","Premium Pack (TCG)","Premium Pack 2 (TCG)","Primal Origin","Primal Origin Plus","Primal Origin Sneak Peek Participation Card","Primal Origin: Deluxe Edition","Ra Yellow Mega-Pack","Ra Yellow Mega-Pack: Special Edition","Raging Battle","Raging Battle Sneak Peek Participation Card","Raging Battle: Special Edition","Realm of Light Structure Deck","Realm of the Sea Emperor Structure Deck","Retro Pack","Retro Pack 2","Return of the Duelist","Return of the Duelist Sneak Peek participation card","Return of the Duelist: Special Edition","Rise of Destiny","Rise of Destiny: Special Edition","Rise of the Dragon Lords Structure Deck","Saber Force Starter Deck","Saga of Blue-Eyes White Dragon Structure Deck","Samurai Assault","Samurai Warlords Structure Deck","San Diego Comic-Con promotional cards","Secrets of Eternity","Secrets of Eternity Sneak Peek Participation Card","Secrets of Eternity: Super Edition","Shadow Specters","Shadow Specters Sneak Peek Participation Card","Shadow Specters: Special Edition","Shadow of Infinity","Shadow of Infinity Sneak Peek participation card","Shadow of Infinity: Special Edition","Shonen Jump 2007 subscription bonus","Shonen Jump August 2008 subscription bonus","Shonen Jump Championship 2004 Prize Card","Shonen Jump Championship 2005 Prize Card","Shonen Jump Championship 2006 Prize Card","Shonen Jump Championship 2007 Prize Card A","Shonen Jump Championship 2007 Prize Card B","Shonen Jump Championship 2008 Prize Card","Shonen Jump Championship 2009 Prize Card","Shonen Jump December 2010 subscription bonus","Shonen Jump December 2011 subscription bonus","Shonen Jump February 2009 subscription bonus","Shonen Jump Fifth Anniversary Collector's Issue promotional card","Shonen Jump June/July 2011 subscription bonus","Shonen Jump March 2010 subscription bonus","Shonen Jump May 2005 subscription bonus","Shonen Jump May 2006 subscription bonus","Shonen Jump May 2008 subscription bonus","Shonen Jump May 2010 subscription bonus","Shonen Jump Scholastic Edition promotional card","Shonen Jump Vol. 1, Issue 1 promotional card","Shonen Jump Vol. 10, Issue 1 promotional card","Shonen Jump Vol. 10, Issue 3 promotional card","Shonen Jump Vol. 10, Issue 4 promotional card","Shonen Jump Vol. 2, Issue 1 promotional card","Shonen Jump Vol. 3, Issue 1 promotional card","Shonen Jump Vol. 3, Issue 11 promotional card","Shonen Jump Vol. 3, Issue 6 promotional card","Shonen Jump Vol. 3, Issue 9 promotional card","Shonen Jump Vol. 4, Issue 1 promotional card","Shonen Jump Vol. 4, Issue 10 promotional card","Shonen Jump Vol. 4, Issue 11 promotional card","Shonen Jump Vol. 4, Issue 12 promotional card","Shonen Jump Vol. 4, Issue 2 promotional card","Shonen Jump Vol. 4, Issue 5 promotional card","Shonen Jump Vol. 5, Issue 1 promotional card","Shonen Jump Vol. 5, Issue 11 promotional card","Shonen Jump Vol. 5, Issue 4 promotional card","Shonen Jump Vol. 5, Issue 6 promotional card","Shonen Jump Vol. 5, Issue 9 promotional card","Shonen Jump Vol. 6, Issue 1 promotional card","Shonen Jump Vol. 6, Issue 12 promotional card","Shonen Jump Vol. 6, Issue 3 promotional card","Shonen Jump Vol. 6, Issue 5 promotional card","Shonen Jump Vol. 6, Issue 9 promotional card","Shonen Jump Vol. 7, Issue 1 promotional card","Shonen Jump Vol. 7, Issue 11 promotional card","Shonen Jump Vol. 7, Issue 3 promotional card","Shonen Jump Vol. 7, Issue 6 promotional card","Shonen Jump Vol. 7, Issue 9 promotional card","Shonen Jump Vol. 8, Issue 1 promotional card","Shonen Jump Vol. 8, Issue 11 promotional card","Shonen Jump Vol. 8, Issue 3 promotional card","Shonen Jump Vol. 8, Issue 5 promotional card","Shonen Jump Vol. 8, Issue 7 promotional card","Shonen Jump Vol. 8, Issue 9 promotional card","Shonen Jump Vol. 9, Issue 1 promotional card","Shonen Jump Vol. 9, Issue 10 promotional card","Shonen Jump Vol. 9, Issue 3 promotional card","Shonen Jump Vol. 9, Issue 4 promotional card","Shonen Jump Vol. 9, Issue 6 promotional card","Shonen Jump Vol. 9, Issue 8 promotional card","Shonen Jump promotional cards","Soul of the Duelist","Space-Time Showdown Power-Up Pack","Spell Ruler","Spellcaster's Command Structure Deck","Star Pack 2013","Star Pack 2014","Star Pack ARC-V","Stardust Overdrive","Stardust Overdrive Sneak Peek participation card","Stardust Overdrive: Special Edition","Starstrike Blast","Starstrike Blast Sneak Peek Participation Card","Starter Deck 2006","Starter Deck 2006: Special Edition","Starter Deck: Dawn of the Xyz","Starter Deck: Duelist Toolbox","Starter Deck: Jaden Yuki","Starter Deck: Joey","Starter Deck: Kaiba","Starter Deck: Kaiba Evolution","Starter Deck: Kaiba Reloaded","Starter Deck: Pegasus","Starter Deck: Syrus Truesdale","Starter Deck: Xyz Symphony","Starter Deck: Yu-Gi-Oh! 5D's","Starter Deck: Yu-Gi-Oh! 5D's 2009","Starter Deck: Yugi","Starter Deck: Yugi Evolution","Starter Deck: Yugi Reloaded","Storm of Ragnarok","Storm of Ragnarok Sneak Peek participation card","Storm of Ragnarok: Special Edition","Strike of Neos","Strike of Neos Sneak Peek Participation Card","Strike of Neos: Special Edition","Structure Deck: Blaze of Destruction","Structure Deck: Dinosaur's Rage","Structure Deck: Dinosaur's Rage Special Set","Structure Deck: Dragon's Roar","Structure Deck: Fury from the Deep","Structure Deck: Invincible Fortress","Structure Deck: Lord of the Storm","Structure Deck: Machine Re-Volt","Structure Deck: Marik (TCG)","Structure Deck: Spellcaster's Command Special Edition","Structure Deck: Spellcaster's Judgment","Structure Deck: Warrior's Triumph","Structure Deck: Zombie Madness","Summoned Skull Sample promotional card","Super Starter Power-Up Pack","Super Starter: Space-Time Showdown","Super Starter: V for Victory","Swedish Shonen Jump 2004, Issue 3 promotional card","Swedish Shonen Jump 2005, Issue 12 promotional card","Synchron Extreme Structure Deck","Tactical Evolution","Tactical Evolution Sneak Peek Participation Card","Tactical Evolution: Special Edition","The Dark Emperor Structure Deck","The Duelist Genesis","The Duelist Genesis Sneak Peek Participation Card","The Duelist Genesis: Special Edition","The Lost Millennium","The Lost Millennium Sneak Peek participation card","The Lost Millennium: Special Edition","The New Challengers","The New Challengers Sneak Peek Participation Card","The New Challengers: Super Edition","The Secret Forces","The Shining Darkness","The Shining Darkness Sneak Peek Participation Card","Tournament Pack 4","Tournament Pack 5","Tournament Pack 6","Tournament Pack 7","Tournament Pack 8","Tournament Pack: 1st Season","Tournament Pack: 2nd Season","Tournament Pack: 3rd Season","Turbo Pack: Booster Eight","Turbo Pack: Booster Five","Turbo Pack: Booster Four","Turbo Pack: Booster One","Turbo Pack: Booster Seven","Turbo Pack: Booster Six","Turbo Pack: Booster Three","Turbo Pack: Booster Two","Twilight Edition","Ultimate Edition","Ultimate Edition 2","Upper Deck Entertainment promotional card","War of the Giants Reinforcements","War of the Giants: Round 2","Warriors' Strike Structure Deck","Weekly Shonen Jump Alpha April 2012 membership promotional card","Weekly Shonen Jump Alpha December 2012 membership promotional card","Weekly Shonen Jump Alpha July 2012 membership promotional card","Weekly Shonen Jump Alpha September 2012 membership promotional card","Weekly Shonen Jump August 2014 membership promotional card","Weekly Shonen Jump December 2013 membership promotional card","Weekly Shonen Jump July 2013 membership promotional card","Weekly Shonen Jump March 2013 membership promotional card","Weekly Shonen Jump March 2014 membership promotional card","Weekly Shonen Jump November 2014 membership promotional card","Weekly Shonen Jump September 2013 membership promotional card","World Championship 2010 Card Pack","World Championship 2011 Card Pack","World Superstars","X-Saber Power-Up","Yu-Gi-Oh the Movie DVD","Yu-Gi-Oh! 10th Anniversary Movie Promo","Yu-Gi-Oh! 3D Bonds Beyond Time Blu-Ray & DVD promotional card","Yu-Gi-Oh! 3D Bonds Beyond Time Movie Pack","Yu-Gi-Oh! 5D's Duel Transer promotional cards","Yu-Gi-Oh! 5D's Stardust Accelerator promotional cards","Yu-Gi-Oh! 5D's Tag Force 4 promotional cards","Yu-Gi-Oh! 5D's Tag Force 5 Promotional Cards","Yu-Gi-Oh! 5D's Tag Force 5 promotional cards","Yu-Gi-Oh! 5D's Volume 1 promotional card","Yu-Gi-Oh! 5D's Volume 2 promotional card","Yu-Gi-Oh! 5D's Volume 3 promotional card","Yu-Gi-Oh! 5D's Volume 4 promotional card","Yu-Gi-Oh! 5D's Volume 5 promotional card","Yu-Gi-Oh! 5D's Volume 6 promotional card","Yu-Gi-Oh! 5D's Volume 7 promotional card","Yu-Gi-Oh! 5D's Volume 9 promotional card","Yu-Gi-Oh! 5D's Wheelie Breakers Promotional Cards","Yu-Gi-Oh! 5D's Wheelie Breakers promotional cards","Yu-Gi-Oh! 5D's World Championship 2009: Stardust Accelerator promotional cards","Yu-Gi-Oh! 5D's World Championship 2010: Reverse of Arcadia promotional cards","Yu-Gi-Oh! 5D's World Championship 2011: Over the Nexus promotional cards","Yu-Gi-Oh! 5D's volume 8 promotional card","Yu-Gi-Oh! 7 Trials to Glory: World Championship Tournament 2005 promotional cards","Yu-Gi-Oh! Capsule Monster Coliseum promotional cards","Yu-Gi-Oh! Championship Series 2010 Prize Cards","Yu-Gi-Oh! Championship Series 2011 Prize Card","Yu-Gi-Oh! Championship Series 2012 Prize Card","Yu-Gi-Oh! Championship Series 2013 Prize Card","Yu-Gi-Oh! Championship Series 2014 Prize Card","Yu-Gi-Oh! Championship Series 2015 Prize Card","Yu-Gi-Oh! Dark Duel Stories promotional cards","Yu-Gi-Oh! Destiny Board Traveler promotional cards","Yu-Gi-Oh! Double Pack promotional cards","Yu-Gi-Oh! Duelist Volume 16 promotional card","Yu-Gi-Oh! Elemental Hero Collection 1","Yu-Gi-Oh! Elemental Hero Collection 2","Yu-Gi-Oh! Forbidden Memories Promotional Cards","Yu-Gi-Oh! GX Card Almanac promotional cards","Yu-Gi-Oh! GX Duel Academy promotional cards","Yu-Gi-Oh! GX Special Edition","Yu-Gi-Oh! GX Spirit Caller promotional cards","Yu-Gi-Oh! GX Tag Force 2 promotional cards","Yu-Gi-Oh! GX Tag Force 3 promotional cards","Yu-Gi-Oh! GX Tag Force Evolution promotional cards","Yu-Gi-Oh! GX Tag Force promotional cards","Yu-Gi-Oh! GX Ultimate Beginner's Pack","Yu-Gi-Oh! GX Volume 1 promotional card","Yu-Gi-Oh! GX Volume 2 promotional card","Yu-Gi-Oh! GX Volume 3 promotional card","Yu-Gi-Oh! GX Volume 4 promotional card","Yu-Gi-Oh! GX Volume 5 promotional card","Yu-Gi-Oh! GX Volume 6 promotional card","Yu-Gi-Oh! GX Volume 7 promotional card","Yu-Gi-Oh! GX Volume 8 promotional card","Yu-Gi-Oh! GX Volume 9 promotional card","Yu-Gi-Oh! Millennium World Volume 4 promotional card","Yu-Gi-Oh! National Championships Prize Cards","Yu-Gi-Oh! Nightmare Troubadour promotional cards","Yu-Gi-Oh! Power of Chaos: Kaiba the Revenge promotional cards","Yu-Gi-Oh! R Volume 1 promotional card","Yu-Gi-Oh! R Volume 3 promotional card","Yu-Gi-Oh! R Volume 4 promotional card","Yu-Gi-Oh! R Volume 5 promotional card","Yu-Gi-Oh! Reshef of Destruction promotional cards","Yu-Gi-Oh! The Dawn of Destiny promotional cards","Yu-Gi-Oh! The Duelists of the Roses promotional cards","Yu-Gi-Oh! The Eternal Duelist Soul promotional cards","Yu-Gi-Oh! The Falsebound Kingdom Promotional Cards","Yu-Gi-Oh! The Falsebound Kingdom promotional cards","Yu-Gi-Oh! The Movie Ani-Manga promotional card","Yu-Gi-Oh! The Sacred Cards promotional cards","Yu-Gi-Oh! Trading Card Game Tour 2004 promotional card","Yu-Gi-Oh! Ultimate Masters: World Championship Tournament 2006 promotional cards","Yu-Gi-Oh! World Championship 2004 prize cards","Yu-Gi-Oh! World Championship 2005 prize cards","Yu-Gi-Oh! World Championship 2006 prize cards","Yu-Gi-Oh! World Championship 2007 prize cards","Yu-Gi-Oh! World Championship 2007 promotional cards","Yu-Gi-Oh! World Championship 2008 prize cards","Yu-Gi-Oh! World Championship 2008 promotional cards","Yu-Gi-Oh! World Championship 2009 prize cards","Yu-Gi-Oh! World Championship 2010 prize cards","Yu-Gi-Oh! World Championship 2011 prize cards","Yu-Gi-Oh! World Championship 2012 prize cards","Yu-Gi-Oh! World Championship 2013 prize cards","Yu-Gi-Oh! World Championship 2014 prize cards","Yu-Gi-Oh! World Championship 2015 prize cards","Yu-Gi-Oh! World Championship Tournament 2004 promotional cards","Yu-Gi-Oh! Worldwide Edition: Stairway to the Destined Duel promotional cards","Yu-Gi-Oh! ZEXAL Volume 1 promotional card","Yu-Gi-Oh! ZEXAL Volume 2 promotional card","Yu-Gi-Oh! ZEXAL Volume 3 promotional card","Yu-Gi-Oh! ZEXAL Volume 4 promotional card","Yu-Gi-Oh! ZEXAL Volume 5 promotional card","Yu-Gi-Oh! ZEXAL Volume 6 promotional card","Yu-Gi-Oh! ZEXAL Volume 7 promotional card","Yu-Gi-Oh! ZEXAL Volume 8 promotional card","Yu-Gi-Oh! ZEXAL Volume 9 promotional card","Yu-Gi-Oh! ZEXAL World Duel Carnival promotional cards","Yugi's Legendary Decks","Zexal Collection Tin","Zombie World Structure Deck"]
+
+
+# Group Rising and Falling and Top 100 Lists 
+
+## Retrieve rising and falling cards list [GET /rising_and_falling]
+
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": {
+                "rising": [
+                    {
+                        "name": "Karma Cut",
+                        "price": 5.75,
+                        "price_shift": 2.508,
+                        "card_number": "SOI-EN053",
+                        "card_set": "Shadow of Infinity",
+                        "rarity": "Rare"
+                    },
+                    {
+                        "name": "Right Arm of the Forbidden One",
+                        "price": 9.5,
+                        "price_shift": 0.0649627263045793,
+                        "card_number": "LCYW-EN304",
+                        "card_set": "Legendary Collection 3 Mega-Pack",
+                        "rarity": "Secret Rare"
+                    }
+                ],
+                "falling": [
+                    {
+                        "name": "Dark Lucius LV8",
+                        "price": 4.11,
+                        "price_shift": -0.534210526315789,
+                        "card_number": "CDIP-EN011",
+                        "card_set": "Cyberdark Impact",
+                        "rarity": "Ultimate Rare"
+                    },
+                    {
+                        "name": "Ghostrick Alucard",
+                        "price": 10.99,
+                        "price_shift": -0.174375578168363,
+                        "card_number": "SHSP-EN052",
+                        "card_set": "Shadow Specters",
+                        "rarity": "Ultra Rare"
+                    }
+                ]
+            }
+        }
+
+## Retrieve Top 100 most expensive cards [GET /top_100_cards?rarity={?rarity}]
+You can optionally pass along a specific __rarity__ to retrieve a list containing only cards of the given rarity.
+
++ Parameters
+    + rarity (string) - Rarity of cards to retrieve top 100 list for
+    
++ Response 200 (application/json)
+
+        {
+            "status": "success",
+            "data": [
+                {
+                    "name": "Dante, Traveler of the Burning Abyss",
+                    "price": 53.95,
+                    "price_shift": 0.00231089200431367,
+                    "card_number": "DUEA-EN085",
+                    "card_set": "Duelist Alliance",
+                    "rarity": "Secret Rare"
+                },
+                {
+                    "name": "Chimeratech Overdragon",
+                    "price": 12.95,
+                    "price_shift": 0,
+                    "card_number": "POTD-EN034",
+                    "card_set": "Power of the Duelist",
+                    "rarity": "Ultimate Rare"
+                }
+            ]
+        }
+
+
+# Group  Getting Card Data
+Retrieve data about a specific card
+
+## Retrieve all information for a card using its name [GET /card_data/{card_name}]
+
++ Parameters
+    + card_name (string) - Name of card to retrieve data for
+    
++ Response 200 (application/json)
+
+        {
+          "status": "success",
+          "data": {
+            "name": "Blue-Eyes White Dragon",
+            "text": "This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.",
+            "card_type": "monster",
+            "type": "Dragon",
+            "family": "light",
+            "atk": 3000,
+            "def": 2500,
+            "level": 8,
+            "property": null
+          }
+        }
+
+## Retrieve a list of all known versions of a card using its name [GET /card_versions/{card_name}]
+
++ Parameters
+    + card_name (string) - Name of card to retrieve data for
+    
++ Response 200 (application/json)
+
+        {
+          "status": "success",
+          "data": [
+            {
+              "name": "Storm of Ragnarok",
+              "print_tag": "STOR-EN061",
+              "rarity": "Super Rare"
+            },
+            {
+              "name": "Battle Pack: Epic Dawn",
+              "print_tag": "BP01-EN084",
+              "rarity": "Common"
+            },
+            {
+              "name": "Battle Pack 2: War of the Giants",
+              "print_tag": "BP02-EN162",
+              "rarity": "Common"
+            }
+          ]
+        } 
+
+## Retrieve a list of support cards for a given card using its name [GET /card_support/{card_name}]
+
++ Parameters
+    + card_name (string) - Name of card to retrieve data for
+    
++ Response 200 (application/json)
+
+        [
+          "Cyber Harpie Lady",
+          "Harpie Channeler",
+          "Harpie Dancer",
+          "Harpie Girl",
+          "Harpie Lady",
+          "Harpie Lady 1",
+          "Harpie Lady 2",
+          "Harpie Lady 3",
+          "Harpie Lady Sisters",
+          "Harpie Queen",
+          "Harpie's Pet Baby Dragon",
+          "Harpie's Pet Dragon",
+          "Harpie's Pet Mirage Dragon"
+        ] 
+
+
+# Group Getting Card and Card Set Images
+
+## Retrieve the image for a specific card using its name [GET /card_image/{card_name}]
+
++ Parameters
+    + card_name (string) - Name of card to retrieve image for
+
++ Response 200 (image/jpeg)
+
+## Retrieve the image for a specific card set using its name [GET /set_image/{set_name}]
+
++ Parameters
+    + set_name (string) - Name of set to retrieve image for
+
++ Response 200 (image/jpeg)
+
+
+
+
+
+
+
+
